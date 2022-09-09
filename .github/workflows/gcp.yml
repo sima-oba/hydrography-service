@@ -34,7 +34,7 @@ jobs:
           echo ${{ steps.auth.outputs.access_token }} | docker login -u oauth2accesstoken --password-stdin https://$REGISTRY-docker.pkg.dev
 
       - name: Build Docker Image
-        run: docker build . --file .docker/Dockerfile.prod --tag auth:latest
+        run: docker build . --file .docker/Dockerfile.prod --tag hydrography:latest
 
       - name: Push Docker Image to Artifact Registry
         run: |-
