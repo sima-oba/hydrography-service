@@ -33,6 +33,8 @@ from .consumer import (
     IrrigatedAreaConsumer,
     LimitLvl1Consumer,
     LimitLvl2Consumer,
+    LimitLvl4Consumer,
+    LimitLvl5Consumer,
     PivotConsumer,
     WaterAvailabilityConsumer,
     WaterSecurityConsumer,
@@ -82,6 +84,12 @@ def start_consumer(config):
     limit_lvl_1_consumer.start(kafka_config, 'LIMIT_LVL_1')
     limit_lvl_2_consumer = LimitLvl2Consumer(limits_service)
     limit_lvl_2_consumer.start(kafka_config, 'LIMIT_LVL_2')
+    limit_lvl_4_consumer = LimitLvl4Consumer(limits_service)
+    limit_lvl_4_consumer.start(kafka_config, 'BASIN_RIO_GRANDE')
+    limit_lvl_5_consumer = LimitLvl5Consumer(limits_service)
+    limit_lvl_5_consumer.start(kafka_config, 'CORRENTE_BASIN')
+    limit_lvl_5b_consumer = LimitLvl5Consumer(limits_service)
+    limit_lvl_5b_consumer.start(kafka_config, 'CARINHANHA_BASIN')
 
     water_avail_repo = WaterAvailabilityRepository(db)
     water_avail_service = WaterAvailabilityService(water_avail_repo)
@@ -115,6 +123,7 @@ def start_consumer(config):
     irrigated_area_consumer.wait()
     limit_lvl_1_consumer.wait()
     limit_lvl_2_consumer.wait()
+    limit_lvl_4_consumer.wait()
     pivot_consumer.wait()
     water_avail_consumer.wait()
     water_security_consumer.wait()

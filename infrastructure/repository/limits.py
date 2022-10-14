@@ -3,7 +3,7 @@ from typing import List
 from pymongo.database import Database
 from gridfs import GridFS
 
-from domain.entity import Limit_L1, Limit_L2
+from domain.entity import Limit_L1, Limit_L2, Limit_L4, Limit_L5
 from domain.repository import LimitsRepositoryInterface
 from .base import BaseRepository
 
@@ -39,10 +39,22 @@ class _Limit_L2(BaseRepository):
         super().__init__(Limit_L2, db['limit_lvl_2'])
 
 
+class _Limit_L4(BaseRepository):
+    def __init__(self, db: Database):
+        super().__init__(Limit_L4, db['limit_lvl_4'])
+
+
+class _Limit_L5(BaseRepository):
+    def __init__(self, db: Database):
+        super().__init__(Limit_L5, db['limit_lvl_5'])
+
+
 class LimitsRepository(LimitsRepositoryInterface):
     def __init__(self, db: Database):
         self._limit_L1 = _Limit_L1(db)
         self._limit_L2 = _Limit_L2(db)
+        self._limit_L4 = _Limit_L4(db)
+        self._limit_L5 = _Limit_L5(db)
 
     def find_limits_L1(self) -> List[Limit_L1]:
         return self._limit_L1.find_all()
@@ -50,8 +62,20 @@ class LimitsRepository(LimitsRepositoryInterface):
     def find_limits_L2(self) -> List[Limit_L2]:
         return self._limit_L2.find_all()
 
+    def find_limits_L4(self) -> List[Limit_L4]:
+        return self._limit_L4.find_all()
+
+    def find_limits_L5(self) -> List[Limit_L4]:
+        return self._limit_L5.find_all()
+
     def insert_limit_L1(self, limit: Limit_L1) -> Limit_L1:
         return self._limit_L1.insert(limit)
 
     def insert_limit_L2(self, limit: Limit_L2) -> Limit_L2:
         return self._limit_L2.insert(limit)
+
+    def insert_limit_L4(self, limit: Limit_L4) -> Limit_L4:
+        return self._limit_L4.insert(limit)
+
+    def insert_limit_L5(self, limit: Limit_L5) -> Limit_L5:
+        return self._limit_L5.insert(limit)

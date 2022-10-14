@@ -4,7 +4,12 @@ from .contrib_schema import ContribSchema
 from .flow_rate_schema import FlowRateSchema
 from .hydrography_schema import HydrographySchema, RiverQuery
 from .irrigated_area import IrrigatedAreaSchema
-from .limits_schema import LimitLvl1Schema, LimitLvl2Schema
+from .limits_schema import (
+    LimitLvl1Schema,
+    LimitLvl2Schema,
+    LimitLvl4Schema,
+    LimitLvl5Schema
+)
 from .pivot_schema import PivotSchema
 from .water_availability_schema import WaterAvailabilitySchema
 from .water_security_schema import WaterSecuritySchema
@@ -19,6 +24,8 @@ __all__ = [
     'IrrigatedAreaSchema',
     'LimitLvl1Schema',
     'LimitLvl2Schema',
+    'LimitLvl4Schema',
+    'LimitLvl5Schema',
     'WaterAvailabilitySchema',
     'WaterbodySchema',
     'WaterSecuritySchema',

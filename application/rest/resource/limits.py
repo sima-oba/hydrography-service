@@ -25,6 +25,18 @@ def get_namespace(service: LimitsService) -> Namespace:
         'level': fields.String(description='Level')
     }))
 
+    limits_lvl_4_model = utils.geojson_model(ns, ns.model('Limit4', {
+        '_id': fields.String(description='ID'),
+        'created_at': fields.DateTime(description='The creation date'),
+        'updated_at': fields.DateTime(description='The update date')
+    }))
+
+    limits_lvl_5_model = utils.geojson_model(ns, ns.model('Limit5', {
+        '_id': fields.String(description='ID'),
+        'created_at': fields.DateTime(description='The creation date'),
+        'updated_at': fields.DateTime(description='The update date')
+    }))
+
     @ns.route('/limits_lvl_1')
     class LimitsLvl1GeoJson(Resource):
         @ns.response(200, 'Returns a GeoJSON object', limits_lvl_1_model)
@@ -39,6 +51,22 @@ def get_namespace(service: LimitsService) -> Namespace:
         @cache_for(days=30)
         def get(self):
             limits = service.find_limits_L2()
+            return utils.make_geojson_response(limits)
+
+    @ns.route('/limits_lvl_4')
+    class LimitsLv4GeoJson(Resource):
+        @ns.response(200, 'Returns a GeoJSON object', limits_lvl_4_model)
+        @cache_for(days=30)
+        def get(self):
+            limits = service.find_limits_L4()
+            return utils.make_geojson_response(limits)
+
+    @ns.route('/limits_lvl_5')
+    class LimitsLv5GeoJson(Resource):
+        @ns.response(200, 'Returns a GeoJSON object', limits_lvl_5_model)
+        @cache_for(days=30)
+        def get(self):
+            limits = service.find_limits_L5()
             return utils.make_geojson_response(limits)
 
     return ns
