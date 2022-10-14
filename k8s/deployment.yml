@@ -28,7 +28,7 @@ spec:
         resources:
           limits:
             memory: "512Mi"
-            cpu: "300m"
+            cpu: "150m"
       - name: hydrography-kafka
         image: $REGISTRY-docker.pkg.dev/$PROJECT_ID/sima/hydrography:$IMAGE_TAG
         imagePullPolicy: Always
