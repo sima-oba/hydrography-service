@@ -16,3 +16,13 @@ class Limit_L1(Base):
 class Limit_L2(Base):
     level: str
     geometry: dict
+
+
+@dataclass
+class Limit_L4(Base):
+    geometry: dict
+
+
+@dataclass
+class Limit_L5(Base):
+    geometry: dict

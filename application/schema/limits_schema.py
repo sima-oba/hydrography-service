@@ -3,7 +3,8 @@ from marshmallow import (
     post_load,
     Schema,
     ValidationError,
-    fields
+    fields,
+    EXCLUDE
 )
 
 from .feature_collection_schema import FeatureCollectionSchema
@@ -44,3 +45,15 @@ class LimitLvl2Schema(FeatureCollectionSchema):
             }
             limits.append(limit)
         return limits
+
+
+class LimitLvl4Schema(Schema):
+    class Meta:
+        unknown = EXCLUDE
+    geometry = fields.Dict(required=True)
+
+
+class LimitLvl5Schema(Schema):
+    class Meta:
+        unknown = EXCLUDE
+    geometry = fields.Dict(required=True)
